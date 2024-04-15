@@ -14,10 +14,23 @@ var personage = [                                   //  Nom du produit
         lieudenaissance: "Montpelier"
     } 
 ]
-console.log(personage)                              // affichage des deux objets
+//console.log(personage)                              // affichage des deux objets
 
-personage.pop ()                                    // fonction pour supprimer le dernier objets
-console.log(personage)                              // affichage de la suppression du dernier objets 
+//personage.pop ()                                    // fonction pour supprimer le dernier objets
+//console.log(personage)                              // affichage de la suppression du dernier objets 
+
+for (var i =0; i < 10; i++) {
+    personage.push(
+        {
+            firstname: "kobe jr" + i,                           // infos de l'objet
+            lastname: "bryan" + i,
+            age: 36 + i,
+            datestart: 1988,
+            lieudenaissance: "atlanta"
+        }  
+    )
+}
+
 
 personage.push({                                    //fonction pour ajouter  un objets
     firstname: "kobe jr",                           // infos de l'objet
@@ -26,35 +39,16 @@ personage.push({                                    //fonction pour ajouter  un 
     datestart: 1988,
     lieudenaissance: "atlanta" 
 })
-console.log(personage)                              // affichage de l'objet ajouter
+//console.log(personage)                              // affichage de l'objet ajouter
                                                     // a savoir Tableau = [] et que le produit ou objet = {}.
 
-var personne = [                                    // nom du produit
-    {
-        firstname: "elise",                         // infos du 1er objets
-        lastname: "dubois",
-        age: 32,
-        datestart: 1992,
-        lieudenaissance: "Lyon"
-    },
-    {
-        firstname: "Maxime",                        // infos du 2eme objets
-        lastname: "Moreau",
-        age: 28,
-        datestart: 1995,
-        lieudenaissance: "Montreal"   
-    }
-]
-console.log("firstname",personne[0].firstname)                          // affichage du 1er objets
-console.log("firstname",personne[0].lastname)                           // affichage du 1er objets
-console.log("firstname",personne[0].age)                                // affichage du 1er objets
-console.log("firstname",personne[0].datestart)                          // affichage du 1er objets
-console.log("firstname",personne[0].lieudenaissance,"\n")               // affichage du 1er objets
 
-console.log("firstname",personne[1].firstname)                          // affichage du 2eme objets
-console.log("firstname",personne[1].lastname)                           // affichage du 2eme objets
-console.log("firstname",personne[1].age)                                // affichage du 2eme objets
-console.log("firstname",personne[1].datestart)                          // affichage du 2eme objets
-console.log("firstname",personne[1].lieudenaissance,"\n")               // affichage du 2eme objets
 
-console.log(`il y a ${personne.length} personne dansle tableau`)        // affichage des deux objets,(altgr + touche è = ``) pour ecrire un texte + la commande s{} pout mettre le produit. length.
+for (var i = 0; i < personage.length; i++) {                              // Fonction qui permet de rechercher dans tous le tableau.
+console.log("firstname",personage[i].firstname)                          // affichage du 1er objets
+console.log("Lastname",personage[i].lastname)                           // affichage du 1er objets
+console.log("age",personage[i].age)                                     // affichage du 1er objets
+console.log("datestart",personage[i].datestart)                          // affichage du 1er objets
+console.log("lieu de naissance",personage[i].lieudenaissance,"\n")      // affichage du 1er objets
+console.log(`il est a la ${i} position dans le tableau,"\n"`)
+}

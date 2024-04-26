@@ -72,12 +72,12 @@ function affichagefamille(tab, indent, origin){         // ajouter  la fonction 
         `${tabulation} nom: ${tab[i].lastName} / prenom:${tab[i].firstName} / origin: ${origin}`
       ); // affichage  de la variable tabulation(donc l'espace), avec la position i du nom de famille dans le tableau /la position i du prenom dans le tableau et de l'origine.
       if (tab[i].children && tab[i].children.length > 0) {
-        //si dans tableau enfant a la position i il y a  le parametre enfant et presence d'enfant
+        //si le i-ème élément du tableau tab a des enfants et si ces enfants ont une longueur supérieure à 0.
         affichagefamille(
           tab[i].children,
           indent + 1,
           origin + `${tab[i].firstName} ${tab[i].lastName} - `
-        ); //si le i élément du tableau tab a des enfants et si ces enfants ont une longueur supérieure à 0.
+        ); //appelle de la fonction affichage famille en donnant tableau enfant + augmentation indent + nom et prenom du parent
       }
     }
 }

@@ -85,6 +85,7 @@ var data = [
   },
 ];
 
+// Déclaration d'un objet nommé "type\_element" qui contient trois tableaux vides pour stocker les différents types d'éléments: accompagnement, plat et assaisonnement.
 var type_element = {
   accompagnement: [],
   plat: [],
@@ -136,7 +137,7 @@ for (var i = 0; i < 10; i++) {
       Math.round(
         Math.random() * (type_element.assaisonnement.length - 1 - 0) + 0
       )
-    ]; //Tableau accompagnement = variable "type element". Tableau[ Aleatoire x(variable. taille du tableau) ]
+    ]; //Tableau assaisonement = variable "type element". Tableau[ Aleatoire x(variable. taille du tableau) ]
   var recette = `${accompagnement.nom} ${plat.nom} ${assaisonnement.nom}`; // variable recette = `${"Nom du tableau". nom}`
   var object_recette = {
     // variable "Object_recettes"

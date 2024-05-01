@@ -1,83 +1,80 @@
-var people = [{           // Recursivité en Javascript "parent-enfant"
+var people = [
+  // Recursivité en Javascript "parent-enfant"
+  {
     firstName: "Edouard",
     lastName: "Bernier",
-    children: [{
+    children: [
+      {
         firstName: "Jean",
         lastName: "Bernier",
-        children: [{
+        children: [
+          {
             firstName: "Junior",
             lastName: "Bernier",
-            children: [{
+            children: [
+              {
                 firstName: "Jordan",
-                lastName: "Bernier"
-            },
-            {
+                lastName: "Bernier",
+              },
+              {
                 firstName: "Luc",
-                lastName: "Bernier"
-            }]
-        }]
-    },
-    {
+                lastName: "Bernier",
+              },
+            ],
+          },
+        ],
+      },
+      {
         firstName: "Sacha",
         lastName: "Bernier",
-    },
-    {
+      },
+      {
         firstName: "Laurent",
         lastName: "Bernier",
-    },
-    {
+      },
+      {
         firstName: "Raphael",
         lastName: "Bernier",
-    }]
-},
-{
+      },
+    ],
+  },
+  {
     firstName: "Jean",
     lastName: "Luc",
-    children: [{
+    children: [
+      {
         firstName: "Richard",
         lastName: "Luc",
-        children: [{
+        children: [
+          {
             firstName: "Roméo",
-            lastName: "Luc"
-        }]
-    }]
-}]
+            lastName: "Luc",
+          },
+        ],
+      },
+    ],
+  },
+];
 
-
-
-
-
-function recursiveLoopSub(tab ) {
-for (var i=0; i <tab.length; i++) {
-    console.log(tab[i].firstName, tab[i].lastName);
-    if(tab [i].children && tab [i].children.length > 0)
-    recursiveLoopSub(tab[i].children)
-}
-}
-
-
-
-recursiveLoopSub(people)
-
-function affichagefamille(tab, indent, origin){         // ajouter  la fonction "affichagefamille"
-    let tabulation = ""                                 // ouverture de la variable tabulation.
-
-
-    for(y=0;y < indent; y++){   //tant que inferieur a indent
-    tabulation += " "           // ajout d'espace dans tabulation.
+// Fonction récursive qui affiche le prénom, nom et origine de chaque membre d'un tableau
+function recursiveLoopSub(tab, indent, origin) {
+  for (var i = 0; i < tab.length; i++) {
+    let tabulation = "";
+    for (let y = 0; y < indent; y++) {
+      tabulation += " ";
     }
-    for(let i=0; i< tab.length; i++) {
-      //si i est  Inferieur a  la taille du tableau
-      console.log(
-        `${tabulation} nom: ${tab[i].lastName} / prenom:${tab[i].firstName} / origin: ${origin}`
-      ); // affichage  de la variable tabulation(donc l'espace), avec la position i du nom de famille dans le tableau /la position i du prenom dans le tableau et de l'origine.
-      if (tab[i].children && tab[i].children.length > 0) {
-        //si le i-ème élément du tableau tab a des enfants et si ces enfants ont une longueur supérieure à 0.
-        affichagefamille(
-          tab[i].children,
-          indent + 1,
-          origin + `${tab[i].firstName} ${tab[i].lastName} - `
-        ); //appelle de la fonction affichage famille en donnant tableau enfant + augmentation indent + nom et prenom du parent
-      }
+    console.log(
+      `${tabulation}nom: ${tab[i].lastName} / prénom:${tab[i].firstName} / origin: ${origin}${tab[i].firstName} ${tab[i].lastName}`
+    ); // Affiche le prénom et le nom de l'élément actuel
+    if (tab[i].children && tab[i].children.length > 0) {
+      // Si l'élément actuel a des enfants, on appelle récursivement la fonction sur le tableau des enfants
+      recursiveLoopSub(
+        tab[i].children,
+        indent + 1,
+        origin + `${tab[i].firstName} ${tab[i].lastName} - `
+      );
     }
+  }
 }
+
+recursiveLoopSub(people, 0, "");

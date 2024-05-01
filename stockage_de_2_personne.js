@@ -59,7 +59,7 @@ for (var i = 0; i < personage.length; i++) {                                    
 
 var tableau_des_cinquantenaire = []                                                                             //fonction de la variable
 for (var i=0; i < personage.length; i++)                                                                        // fonction "for" avec () variable "i=0;"; i > nom du tableau du produit(longueur du tableau; i++)
-if(personage[i].age > 50)                                                                                       // fonction "if" avec [i]. une infos du produit(age) >(mange age) 50.
+if(personage[i].age > 50)                                                                                       // fonction "if" avec [i]. une infos du produit(age) >(superieur age) 50.
 tableau_des_cinquantenaire.push({...personage[i]})                                                              //Ajouter un tableau nommer (tableau_des_ cinquentenaire).push ({nom de l'ancien tableau "personnage"+ [i]})
 console.log(`il y a ${tableau_des_cinquantenaire.length} qui ont plus de 50ans dans le tableau\n`)
 

@@ -18,7 +18,7 @@ var data = [                                                        // variable 
 var max =1713251378                                                      // variable maximum
 var min =713251378                                                       // variable minimum
 
-for (var i=0; i < 1000; i++){                                            // commande de la boucle
+for (var i=0; i < 1000; i++){                                            // Creation d'une boucle
     var object_type = data[Math.round(Math.random() *((data.length - 1) - 0)+0)]                                          //variable de object_type est egale a  data(produit) + fonction de l'arrondissement du chiffre generer.
     var object_description = object_type.description[Math.round(Math.random() *object_type.description.length - 1)-0]    //variable de object_type est egale a  data(produit) + fonction de l'arrondissement du chiffre generer.
 

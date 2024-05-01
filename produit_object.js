@@ -5,13 +5,20 @@ let produit = {             //commande let +nom du produit
     nb_vendus: 9,           //nb vendus
 }
 
-console.log(produit)
-produit.gain = produit.prix*produit.nb_vendus
-console.log(produit)
+// Affiche le produit
+console.log(produit);
 
+// Calcule le gain en fonction du prix et du nombre de ventes
+produit.gain = produit.prix * produit.nb_vendus;
 
-produit.valeur_stock = produit.prix*produit.stock
-console.log("produit:",produit.nom,"/Gain:", produit.prix, "/valeur_stock:", produit.stock)
+// Affiche à nouveau le produit avec le gain calculé
+console.log(produit);
+
+// Calcule la valeur du stock en fonction du prix et de la quantité en stock
+produit.valeur_stock = produit.prix * produit.stock;
+
+// Affiche le nom du produit, le gain, le prix et la valeur du stock
+console.log("produit :", produit.nom, " / Gain :", produit.prix, " / valeur_stock :", produit.stock);
 
 produit.cost = 15                                                                                               //nombre du cout
 produit.total_cost = produit.cost * (produit.nb_vendus + produit.stock)                           //calcul du cout total= cout * (nb vendus +stock) 

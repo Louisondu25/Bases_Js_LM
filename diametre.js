@@ -1,15 +1,24 @@
-let rayon = 4                          //Rayon initiale du cercle
-rayon = rayon * 2                       //calcul du diametre
-console.log (rayon)                     //affichage du diametre
+// Exercice 1 : Rayon et diamètre d'un cercle
+// Déclaration d'une variable "rayon" initialisée à 4
+let rayon = 4;
 
+// Calcul du diamètre du cercle en multipliant le rayon par 2
+rayon = rayon * 2;
 
-// exercice 4:operateur
-let montitre = "cesmontitre"                //le titre 
-let monsoustitre = "cestmonsoustitre"       //le soustitre
-let ensemble = monsoustitre + montitre      // le calcul
-console.log(ensemble)
+// Affichage du diamètre du cercle
+console.log(rayon);
 
+// Exercice 2 : Opérateur de concaténation
+// Déclaration de deux variables "montitre" et "monsoustitre"
+let montitre = "cesmontitre";
+let monsoustitre = "cestmonsoustitre";
 
-// ex5
+// Concaténation des deux variables "montitre" et "monsoustitre"
+let ensemble = monsoustitre + montitre;
 
-let estAllumer = true
+// Affichage de la chaîne de caractères concaténée
+console.log(ensemble);
+
+// Exercice 3 : Variable booléenne
+// Déclaration d'une variable "estAllumer" initialisée à true
+let estAllumer = true;

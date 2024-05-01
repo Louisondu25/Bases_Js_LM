@@ -1,5 +1,9 @@
-//exercice 6
-let livrevendus = 100                                           //total des livres vendu par semaine
-livrevendus += 50                                               // ajout des livres vendu
-let moyennedelivrevendus = livrevendus / 7                      //calcul des livres vendus
-console.log("Le nombre de livre vendu par jour est de :" , moyennedelivrevendus,Math.round(moyennedelivrevendus))                         //affichage du commentaire + resultat
+// Exercice 6
+let livrevendus = 100; // Nombre total de livres vendus par semaine
+livrevendus += 50; // Ajout de 50 livres vendus
+let moyennedelivrevendus = livrevendus / 7; // Calcul du nombre moyen de livres vendus par jour
+console.log(
+  "Le nombre de livres vendus par jour est de :",
+  moyennedelivrevendus,
+  Math.round(moyennedelivrevendus)
+); // Affichage du résultat dans la console

@@ -15,4 +15,3 @@ console.log(`Autorisé: ${authorised}`)                      //affichage de l'au
 
 var authorised2 = age >=18 ? true : false                   //  fonction des Condition ternaires
 console.log(`Autorisé: ${authorised}`)                      // affichage de l'autorisation des condition ternaires
-                                                            // a savoir qu'on est pas obliger d'avoir des accolades si on a qu'une ligne de

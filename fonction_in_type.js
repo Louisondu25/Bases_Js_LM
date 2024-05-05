@@ -29,26 +29,32 @@ for (let i = 0; i < tab_element.length; i++) {
     pile_card.push(tab_element[i] + "-" + type[j]);
   }
 }
-
-// Définition de fonctions pour mélanger les éléments du tableau pile_card
+// Fonction shuffle() qui prend en paramètre un tableau et le mélange aléatoirement
 function shuffle(tab) {
+  // On utilise la méthode sort() pour trier le tableau aléatoirement en utilisant une fonction de comparaison
   return tab.sort(function () {
+    // On retourne un nombre aléatoire entre -0.5 et 0.5 pour que les éléments soient triés dans un ordre aléatoire
     return Math.random() - 0.5;
   });
 }
 
+// Fonction shuffleOther() qui prend en paramètre un tableau et le mélange aléatoirement
 function shuffleOther(tab) {
+  // On utilise la méthode sort() pour trier le tableau aléatoirement en utilisant une fonction fléchée
   return tab.sort(() => {
+    // On retourne un nombre aléatoire entre -0.5 et 0.5 pour que les éléments soient triés dans un ordre aléatoire
     Math.random() - 0.5;
   });
 }
 
+// Fonction shuffleFisher() qui prend en paramètre un tableau et le mélange aléatoirement en utilisant l'algorithme de Fisher-Yates
 function shuffleFisher(arr) {
+  // On parcourt le tableau en sens inverse
   for (let i = arr.length - 1; 0 > i; i--) {
-    let j = (Math.floor(Math.round() * i + 1)[(arr[i], arr[j])] = [
-      arr[j],
-      arr[i],
-    ]);
+    // On génère un indice aléatoire j entre 0 et i
+    let j = Math.floor(Math.random() * (i + 1));
+    // On échange les éléments d'indices i et j
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 
@@ -72,8 +78,10 @@ pile_card.splice(turn1, 1);
 
 // Création d'un tableau d'objets contenant les noms, les valeurs et les couleurs des cartes
 pile_card = pile_card.map((card) => {
+  // On sépare la carte en deux parties : la valeur et la couleur
   let value = card.split("-")[0];
   let value_color = card.split("-")[1];
+  // On définit la valeur de la carte en fonction de sa représentation textuelle
   if (isNaN(value) && value != "A") {
     value = 10;
   } else if (isNaN(value) && value == "A") {
@@ -81,14 +89,17 @@ pile_card = pile_card.map((card) => {
   } else {
     value = Number(value);
   }
+  // On définit la couleur de la carte en fonction de sa représentation textuelle
   if (value_color == "CA" || value_color == "C") {
     value_color = "rouge";
   } else {
     value_color = "noir";
   }
+  // On retourne un nouvel objet représentant la carte avec ses propriétés valeur et couleur
   return { name: card, value: value, color: value_color };
 });
 
+// On affiche la pile de cartes
 console.log(pile_card);
 
 // Mélange du tableau pile_card

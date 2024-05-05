@@ -58,7 +58,9 @@ var people = [
 
 // Fonction récursive qui affiche le prénom, nom et origine de chaque membre d'un tableau
 function recursiveLoopSub(tab, indent, origin) {
+  // Boucle sur chaque élément du tableau
   for (var i = 0; i < tab.length; i++) {
+    // Initialisation d'une chaîne de tabulation en fonction de l'indentation donnée
     let tabulation = "";
     for (let y = 0; y < indent; y++) {
       tabulation += " ";

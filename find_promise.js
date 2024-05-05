@@ -97,35 +97,48 @@ var findpeopleLoop = function (firstName, lastName, tab, path) {
         parent: path + element.firstName + " " + element.lastName,
       };
     }
+    // On vérifie si l'élément courant a des enfants
     if (element.children) {
+      // Appel récursif de la fonction "findpeopleLoop" avec le tableau "children" de l'élément courant et le chemin mis à jour
       var value = findpeopleLoop(
         firstName,
         lastName,
         element.children,
         path + element.firstName + " " + element.lastName + "/"
       );
+      // Si la fonction "findpeopleLoop" a trouvé un élément correspondant, on le retourne
       if (value) return value;
     }
   }
+  // Si aucun élément correspondant n'a été trouvé, on retourne null
   return null;
 };
 
+// Définition d'une fonction nommée "findPeople" qui prend en argument un prénom "firstName", un nom de famille "lastName", un tableau "people" et un chemin "path"
 var findPeople = function (firstName, lastName, people, path = "") {
+  // Retour d'une promesse qui résout ou rejette en fonction du résultat de la fonction "findpeopleLoop"
   return new Promise((resolve, reject) => {
+    // Appel de la fonction "findpeopleLoop" avec les arguments "firstName", "lastName", "people" et "path"
     var result = findpeopleLoop(firstName, lastName, people, path);
+    // Si la fonction "findpeopleLoop" a trouvé un élément correspondant, on résout la promesse avec le résultat
     if (result) {
       resolve(result);
     } else {
+      // Sinon, on rejette la promesse avec un message d'erreur
       reject("Not found");
     }
   });
 };
 
+// Démarrage de la bibliothèque prompt
 prompt.start();
 
+// Demande de saisie des informations de recherche à l'utilisateur
 prompt.get(["firstName", "lastName"], function (err, result) {
+  // Appel de la fonction "findPeople" avec les informations de recherche saisies par l'utilisateur
   findPeople(result.firstName, result.lastName, people)
     .then((value) => {
+      // Si la fonction "findPeople" a trouvé un élément correspondant, on affiche les informations de l'élément trouvé
       console.log(
         "Personne trouvée:",
         value.firstName,
@@ -134,6 +147,7 @@ prompt.get(["firstName", "lastName"], function (err, result) {
         value.parent
       );
     })
+    // Sinon, on affiche un message d'erreur
     .catch((err) => {
       console.log("Aucune personne trouvée:", err);
     });

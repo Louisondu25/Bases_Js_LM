@@ -28,7 +28,9 @@ obj.job = "Dev";
 
 // Affichage des clés et des valeurs de l'objet
 const keys_existant = Object.keys(obj);
+// Boucle sur chaque clé de l'objet
 for (let i = 0; i < keys_existant.length; i++) {
+  // Affichage de la clé et de sa valeur associée
   console.log(
     "Propriété :",
     keys_existant[i],

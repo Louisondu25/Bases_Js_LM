@@ -1,0 +1,71 @@
+const { faker } = require("@faker-js/faker");
+const _ = require("lodash");
+
+var nombre_elements = 10;
+var price_min = 5.0;
+var price_max = 6.0;
+var stock_min = 0;
+var stock_max = 10;
+var price_interval = 5.5;
+var stock_alert = 3;
+
+var products = [];
+
+for (var i = 0; i < nombre_elements; i++) {
+  products.push({
+    nom: faker.commerce.product(),
+    description: faker.commerce.productDescription(),
+    price: Number(_.random(price_min, price_max, true).toFixed(2)),
+    stock: _.random(stock_min, stock_max),
+    departement: faker.commerce.department(),
+  });
+}
+
+products = products.map(function (e) {
+  return { ...e, value_stock: (e.price * e.stock).toFixed(2) };
+});
+
+function printProduct(tab) {
+  for (let item of tab) {
+    var text = `${item.nom} - ${item.departement} - ${item.price}€ - ${item.stock}`;
+    text = item.value_stock
+      ? text + ` - Stock value : ${item.value_stock}€`
+      : text;
+    console.log(text);
+  }
+}
+
+var categories_and_quantity = {};
+
+var in_stock_more_interval = products.filter(function (e) {
+  return e.price >= price_interval && e.stock > 0;
+});
+var in_stock_less_interval = products.filter(function (e) {
+  return e.price < price_interval && e.stock > 0;
+});
+var no_stock = products.filter(function (e) {
+  return e.stock === 0;
+});
+var re_stock_product = products.filter(function (e) {
+  return e.stock < 3;
+});
+
+var categories_and_quantity = _.groupBy(products, "departement");
+
+console.log(`\nProduit en stock et > ${price_interval}€`);
+printProduct(in_stock_more_interval);
+console.log(`\nProduit en stock et < ${price_interval}€`);
+printProduct(in_stock_less_interval);
+console.log("\nProduit en rupture de stock");
+printProduct(no_stock);
+console.log(
+  `\nProduit en rupture de stock ou bientôt en rupture < ${stock_alert}`
+);
+printProduct(re_stock_product);
+
+console.log("\nCatégories existants avec nombre de produit par catégorie");
+for (let item in categories_and_quantity) {
+  console.log(
+    `${item} - ${categories_and_quantity[item].length} produit(s) dans cette catégorie.`
+  );
+}

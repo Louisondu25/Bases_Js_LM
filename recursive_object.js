@@ -86,6 +86,6 @@ function isPalindrome(str) {
 console.log(isPalindrome("madame")) // Affiche false
 console.log(isPalindrome("venu")); // Affiche false
 console.log(isPalindrome("radar")); // Affiche true
-console.log(isPalindrome("level")); // Affiche false
+console.log(isPalindrome("level")); // Affiche true
 console.log(isPalindrome("racecar")); // Affiche true
-console.log(isPalindrome("level")); // Affiche false
+console.log(isPalindrome("level")); // Affiche true

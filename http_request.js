@@ -112,11 +112,7 @@ function getLogRequest(req, res, next) {
   req.id_request = _.uniqueId("REQUEST_");
 
   // Affiche un message de log avec les informations de la requête
-  console.log(
-    `${new Date().toISOString()}: ${req.method} - ${req.url} (${
-      req.id_request
-    }) - Body: ${_.isEmpty(req.body) ? "Non" : "Oui"}`
-  );
+  console.log(`${new Date().toISOString()}: ${req.method} - ${req.url} (${req.id_request}) - Body: ${_.isEmpty(req.body) ? "Non" : "Oui"}`);
 
   // Appelle la fonction suivante dans le pipeline de middleware
   next();
@@ -125,12 +121,7 @@ function getLogRequest(req, res, next) {
 // Définit la fonction printLogMessage pour afficher un message de log avec les informations de la requête et le message spécifié
 function printLogMessage(req, msg) {
   // Affiche un message de log avec les informations de la requête et le message spécifié
-  console.log(
-    `${new Date().toISOString()}: ${req.method} - ${req.url}  (${
-      req.id_request
-    }) - Body: ${_.isEmpty(req.body) ? "Non" : "Oui"} - ${msg}`
-  );
-}
+  console.log(`${new Date().toISOString()}: ${req.method} - ${req.url}  (${req.id_request}) - Body: ${_.isEmpty(req.body) ? "Non" : "Oui"} - ${msg}`)};
 
 // Définit une route pour récupérer la liste des utilisateurs
 app.get("/users", function (req, res) {
@@ -151,13 +142,7 @@ var UserFieldAuthorized = ["firstName", "lastName", "email", "username"];
 var UserFieldRequired = ["firstName", "lastName", "username"];
 
 // Définit un tableau contenant les noms des champs autorisés pour les produits
-var ProductFieldAuthorized = [
-  "nom",
-  "description",
-  "price",
-  "stock",
-  "departement",
-];
+var ProductFieldAuthorized = ["nom","description","price","stock","departement"];
 
 // Définit un tableau contenant les noms des champs requis pour les produits
 var ProductFieldRequired = ["nom", "description", "price"];
@@ -265,13 +250,7 @@ function checkKeyRequiredIsNotEmpty(obj, fieldRequired) {
 }
 
 // Définit une route pour mettre à jour un utilisateur par son ID
-app.put(
-  "/user/:id",
-  middlewareCheckBodyKeysAuthorizedAndRequiredToPut(
-    users,
-    UserFieldAuthorized,
-    UserFieldRequired
-  ),
+app.put("/user/:id",middlewareCheckBodyKeysAuthorizedAndRequiredToPut(users,UserFieldAuthorized,UserFieldRequired),
   function (req, res) {
     // Récupère les données de l'utilisateur à mettre à jour à partir du corps de la requête
     var user_to_edit = req.body;
@@ -280,10 +259,7 @@ app.put(
     var user_to_edit_index = req.index_element;
 
     // Met à jour l'utilisateur en utilisant l'opérateur spread pour fusionner les données existantes et les nouvelles données
-    users[user_to_edit_index] = {
-      ...users[user_to_edit_index],
-      ...user_to_edit,
-    };
+    users[user_to_edit_index] = {...users[user_to_edit_index],...user_to_edit};
 
     // Envoie l'utilisateur mis à jour dans la réponse
     res.send(users[user_to_edit_index]);
@@ -309,13 +285,7 @@ function middlewareBodyIsArray(req, res, next) {
 }
 
 // Définit une route pour ajouter plusieurs utilisateurs
-app.post(
-  "/users",
-  middlewareBodyIsArray,
-  middlewareCheckBodyKeysAuthorizedAndRequiredArray(
-    UserFieldAuthorized,
-    UserFieldRequired
-  ),
+app.post("/users",middlewareBodyIsArray,middlewareCheckBodyKeysAuthorizedAndRequiredArray(UserFieldAuthorized,UserFieldRequired),
   function (req, res) {
     // Récupère les données à ajouter à partir du corps de la requête
     var users_to_add = req.body;
@@ -356,25 +326,16 @@ const middlewareCheckBodyKeysAuthorizedAndRequired = (
       let text = "";
 
       // Construction du message d'erreur pour les clés non autorisées
-      if (fieldNotAuthorized.length > 0) {
-        text += `One of the properties (${fieldNotAuthorized.join(
-          ", "
-        )}) is not authorized.`;
+      if (fieldNotAuthorized.length > 0) {text += `One of the properties (${fieldNotAuthorized.join(", ")}) is not authorized.`;
       }
 
       // Construction du message d'erreur pour les clés requises manquantes
       if (fieldNoRequiredNotMissing.length > 0) {
-        text += `One of the required properties (${fieldNoRequiredNotMissing
-          .map((e) => `${e.field} : ${e.type_error}`)
-          .join(", ")}) is missing.`;
+        text += `One of the required properties (${fieldNoRequiredNotMissing.map((e) => `${e.field} : ${e.type_error}`).join(", ")}) is missing.`;
       }
 
       // Envoi de la réponse d'erreur
-      res.send({
-        msg: text,
-        field_not_authorized: fieldNotAuthorized,
-        field_require_missing: fieldNoRequiredNotMissing,
-      });
+      res.send({msg: text,field_not_authorized: fieldNotAuthorized,field_require_missing: fieldNoRequiredNotMissing});
     } else {
       // Si il n'y a pas d'erreurs, alors on appelle la fonction next() pour continuer le traitement de la requête
       next();
@@ -398,10 +359,7 @@ function checkKeys(obj, keys) {
 
 function checkObjRequiredKey(obj, keys) {
   // Retourne les clés requises qui ne sont pas présentes dans l'objet ou qui sont invalides
-  return keys.filter(
-    (key) =>
-      !obj.hasOwnProperty(key) || obj[key] === undefined || obj[key] === null
-  );
+  return keys.filter((key) =>!obj.hasOwnProperty(key) || obj[key] === undefined || obj[key] === null);
 }
 
 const middlewareCheckBodyKeysAuthorizedAndRequiredToPut =
@@ -418,10 +376,7 @@ const middlewareCheckBodyKeysAuthorizedAndRequiredToPut =
         user_to_edit[fieldAuthorized[i]] = user_body[fieldAuthorized[i]];
     }
     // Vérification des clés requises vides
-    var field_required_empty = checkKeyRequiredIsNotEmpty(
-      user_to_edit,
-      fieldRequired
-    );
+    var field_required_empty = checkKeyRequiredIsNotEmpty(user_to_edit,fieldRequired);
     // Recherche de l'élément à modifier dans le tableau
     var user_to_edit_index = _.findIndex(tab, ["id", String(id)]);
     // Si l'élément à modifier n'est pas trouvé, alors on envoie une réponse 404
@@ -433,11 +388,7 @@ const middlewareCheckBodyKeysAuthorizedAndRequiredToPut =
     else if (field_required_empty.length > 0) {
       res.statusCode = 405;
       res.send({
-        msg: `Les champs requis (${field_required_empty.join(
-          ", "
-        )}) sont vides, impossible d'effectuer la modification.`,
-        field_required_empty: field_required_empty,
-      });
+        msg: `Les champs requis (${field_required_empty.join(", ")}) sont vides, impossible d'effectuer la modification.`,field_required_empty: field_required_empty,});
     }
     // Si tout est OK, alors on met à jour le corps de la requête et on appelle la fonction next()
     else {
@@ -462,26 +413,13 @@ const middlewareCheckBodyKeysAuthorizedAndRequiredArray =
       var fieldNoRequiredNotMissing = checkObjRequiredKey(user, fieldRequired);
       // Construction du message d'erreur
       var text = `L'élément à la position ${i} :`;
-      if (fieldNotAuthorized.length > 0) {
-        text += `Une des propriétés (${fieldNotAuthorized.join(
-          ", "
-        )}) n'est pas autorisée. `;
-      }
+      if (fieldNotAuthorized.length > 0) {text += `Une des propriétés (${fieldNotAuthorized.join(", ")}) n'est pas autorisée. `;}
       if (fieldNoRequiredNotMissing.length > 0) {
-        text += `Une des propriétés (${fieldNoRequiredNotMissing
-          .map((e) => {
-            return e.field + " : " + e.type_error;
-          })
-          .join(", ")}) requise n'est pas complète. `;
+        text += `Une des propriétés (${fieldNoRequiredNotMissing.map((e) => {return e.field + " : " + e.type_error;}).join(", ")}) requise n'est pas complète. `;
       }
       // Si des erreurs sont détectées, on ajoute un élément à error_element
       if (fieldNotAuthorized.length > 0 || fieldNoRequiredNotMissing.length > 0)
-        error_element.push({
-          msg: text,
-          index: i,
-          field_not_authorized: fieldNotAuthorized,
-          field_require_missing: fieldNoRequiredNotMissing,
-        });
+        error_element.push({msg: text,index: i,field_not_authorized: fieldNotAuthorized,field_require_missing: fieldNoRequiredNotMissing,});
     }
     // Si des erreurs sont détectées, on envoie une réponse 405
     if (error_element.length > 0) {
@@ -498,10 +436,7 @@ const middlewareCheckBodyKeysAuthorizedAndRequiredArray =
 app.post(
   "/user",
   // Middleware pour vérifier les clés autorisées et requises dans le corps de la requête
-  middlewareCheckBodyKeysAuthorizedAndRequired(
-    UserFieldAuthorized,
-    UserFieldRequired
-  ),
+  middlewareCheckBodyKeysAuthorizedAndRequired(UserFieldAuthorized,UserFieldRequired),
   // Fonction pour créer un nouvel utilisateur
   function (req, res) {
     // Récupération du corps de la requête
@@ -519,10 +454,7 @@ app.post(
 app.post(
   "/product",
   // Middleware pour vérifier les clés autorisées et requises dans le corps de la requête
-  middlewareCheckBodyKeysAuthorizedAndRequired(
-    ProductFieldAuthorized,
-    ProductFieldRequired
-  ),
+  middlewareCheckBodyKeysAuthorizedAndRequired(ProductFieldAuthorized,ProductFieldRequired),
   // Fonction pour créer un nouveau produit
   function (req, res) {
     // Récupération du corps de la requête
